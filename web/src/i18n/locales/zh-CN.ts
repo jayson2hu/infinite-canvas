@@ -1,4 +1,16 @@
 export default {
+    ux: {
+        nav: { home: "工作台", projects: "我的项目", assets: "素材库", inspiration: "灵感库", tools: "创作工具", brandHome: "无限画布 · 返回工作台", localAgent: "本地 Agent", source: "开源项目与原作者", preferences: "帮助与偏好", localNotice: "作品保存在当前浏览器。换设备前，记得导出项目。" },
+        projects: {
+            title: "我的项目", description: "接着上次的想法，继续创作。", create: "新建项目", more: "更多项目操作",
+            localNotice: "项目保存在当前浏览器。换设备或清理浏览器前，请先导出备份。",
+            filters: "查找项目", search: "搜索项目名称", count: "{{count}} 个项目", sort: "项目排序", sortUpdated: "最近编辑", sortCreated: "最近创建", sortName: "项目名称",
+            batchActions: "批量操作", selected: "已选择 {{count}} 个项目", clearSelection: "取消选择",
+            noResults: "没有找到这个项目", noResultsHint: "试试更短的名称，或查看全部项目。", clearSearch: "清空搜索",
+            empty: "给第一个想法，一个创作空间", emptyHint: "把参考图、文字和生成结果放在同一个项目里，随时回来继续。",
+            open: "打开 {{name}}", contentCount: "{{count}} 个创作内容", blankCover: "从一个想法开始", projectActions: "{{name}} 的更多操作", updated: "编辑于 {{date}}",
+        },
+    },
     meta: {
         title: "无限画布",
         description: "一个无限画布创作工具",

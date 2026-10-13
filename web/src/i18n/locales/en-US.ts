@@ -1,4 +1,16 @@
 export default {
+    ux: {
+        nav: { home: "Workspace", projects: "My projects", assets: "Assets", inspiration: "Inspiration", tools: "Creative tools", brandHome: "Infinite Canvas · Back to workspace", localAgent: "Local Agent", source: "Open source and author", preferences: "Help and preferences", localNotice: "Projects are stored in this browser. Export them before switching devices." },
+        projects: {
+            title: "My projects", description: "Pick up where you left off.", create: "New project", more: "More project actions",
+            localNotice: "Projects are saved in this browser. Export a backup before switching devices or clearing browser data.",
+            filters: "Find projects", search: "Search project names", count: "{{count}} projects", sort: "Sort projects", sortUpdated: "Recently edited", sortCreated: "Recently created", sortName: "Project name",
+            batchActions: "Bulk actions", selected: "{{count}} projects selected", clearSelection: "Clear selection",
+            noResults: "No matching projects", noResultsHint: "Try a shorter name or view all projects.", clearSearch: "Clear search",
+            empty: "Give your first idea a place to grow", emptyHint: "Keep references, notes, and generated results in one project, ready to continue.",
+            open: "Open {{name}}", contentCount: "{{count}} items", blankCover: "Start with an idea", projectActions: "More actions for {{name}}", updated: "Edited {{date}}",
+        },
+    },
     meta: {
         title: "Infinite Canvas",
         description: "An infinite canvas creation tool",

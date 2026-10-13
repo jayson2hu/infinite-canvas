@@ -1,4 +1,4 @@
-import { FileText, ImagePlus, Images, Maximize2, Settings2, Video } from "lucide-react";
+import { FileText, FolderOpen, ImagePlus, Images, LayoutDashboard, Maximize2, Settings2, Video } from "lucide-react";
 
 export const navigationTools = [
     {
@@ -28,3 +28,12 @@ export const navigationTools = [
 ] as const;
 
 export type NavigationToolSlug = (typeof navigationTools)[number]["slug"];
+
+export const workspaceNavigation = [
+    { slug: "", icon: LayoutDashboard, label: "ux.nav.home" },
+    { slug: "canvas", icon: FolderOpen, label: "ux.nav.projects" },
+    { slug: "assets", icon: Images, label: "ux.nav.assets" },
+    { slug: "prompts", icon: FileText, label: "ux.nav.inspiration" },
+] as const;
+
+export const advancedNavigation = navigationTools.filter((tool) => tool.slug === "image" || tool.slug === "video" || tool.slug === "config");

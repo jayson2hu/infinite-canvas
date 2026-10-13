@@ -1,0 +1,15 @@
+{
+  "scope": "Real local frontend; third-party services blocked; no email, payment or live AI verification",
+  "passed": [
+    "Empty form gives an actionable error and the primary action remains legible",
+    "Task creates a real brief, image draft and connection; all survive a reload",
+    "Project search, whitespace handling, no-result recovery and name sorting work",
+    "Rename and bulk selection work; delete-all still requires confirmation and can be cancelled",
+    "Existing project export still produces a ZIP download",
+    "Small local image covers survive refresh, and most recently edited project appears first",
+    "Theme and language controls remain accessible and update the new workbench",
+    "Mobile workbench and project list fit the viewport; grouped navigation works",
+    "No browser runtime errors or generation POST requests in the tested flow"
+  ],
+  "browser_errors": []
+}

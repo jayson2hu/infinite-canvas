@@ -21,9 +21,10 @@ function releaseTypeLabel(type: string, t: TFunction) {
 type VersionReleaseModalProps = {
     className?: string;
     style?: CSSProperties;
+    triggerLabel?: string;
 };
 
-export function VersionReleaseModal({ className, style }: VersionReleaseModalProps) {
+export function VersionReleaseModal({ className, style, triggerLabel }: VersionReleaseModalProps) {
     const { t } = useTranslation();
     const { open, setOpen, openReleaseModal, latestVersion, releases, checking, hasNewVersion, checkLatestRelease } = useVersionCheck();
 
@@ -37,7 +38,7 @@ export function VersionReleaseModal({ className, style }: VersionReleaseModalPro
                 title={t("version.viewUpdates")}
             >
                 <span className="relative inline-flex">
-                    {APP_VERSION}
+                    {triggerLabel || APP_VERSION}
                     {hasNewVersion ? <span className="absolute -right-1.5 -top-1 size-1.5 rounded-full bg-green-500" /> : null}
                 </span>
             </button>

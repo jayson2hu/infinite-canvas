@@ -1,6 +1,6 @@
 import type { CSSProperties } from "react";
-import { Tooltip } from "antd";
-import { BookOpen, Keyboard, Puzzle, Settings2 } from "lucide-react";
+import { Popover, Tooltip } from "antd";
+import { BookOpen, ExternalLink, History, Keyboard, Languages, MoreHorizontal, Puzzle, Settings2 } from "lucide-react";
 import { useTranslation } from "react-i18next";
 
 import { AnimatedThemeToggler } from "@/components/ui/animated-theme-toggler";
@@ -14,13 +14,14 @@ import { useConfigStore } from "@/stores/use-config-store";
 import { useThemeStore } from "@/stores/use-theme-store";
 
 type UserStatusActionsProps = {
+    compact?: boolean;
     showConfig?: boolean;
     variant?: "default" | "canvas";
     onOpenShortcuts?: () => void;
     onOpenPlugins?: () => void;
 };
 
-export function UserStatusActions({ showConfig = true, variant = "default", onOpenShortcuts, onOpenPlugins }: UserStatusActionsProps) {
+export function UserStatusActions({ compact = false, showConfig = true, variant = "default", onOpenShortcuts, onOpenPlugins }: UserStatusActionsProps) {
     const { i18n, t } = useTranslation();
     const theme = useThemeStore((state) => state.theme);
     const setTheme = useThemeStore((state) => state.setTheme);
@@ -34,6 +35,26 @@ export function UserStatusActions({ showConfig = true, variant = "default", onOp
     const locale = i18n.resolvedLanguage as AppLocale;
     const nextLocale = locale === "zh-CN" ? "en-US" : "zh-CN";
     const languageLabel = t("topNav.switchLanguage", { language: t(nextLocale === "zh-CN" ? "locale.zhCN" : "locale.enUS") });
+
+    if (compact) {
+        const menuClass = "flex w-full items-center gap-3 rounded-md px-3 py-2.5 text-left text-sm text-stone-700 hover:bg-black/5 dark:text-stone-200 dark:hover:bg-white/10";
+        return (
+            <div className="flex shrink-0 items-center gap-2">
+                {showConfig ? <button type="button" className={naturalIconClass} onClick={() => openConfigDialog(false)} aria-label={t("navigation.config")} title={t("navigation.config")}><Settings2 /></button> : null}
+                <AnimatedThemeToggler theme={theme} onThemeChange={setTheme} className={naturalIconClass} aria-label={t(theme === "dark" ? "topNav.lightTheme" : "topNav.darkTheme")} title={t(theme === "dark" ? "topNav.lightTheme" : "topNav.darkTheme")} />
+                <Popover trigger="click" placement="bottomRight" content={
+                    <div className="w-56">
+                        <button type="button" className={menuClass} onClick={() => void changeAppLocale(nextLocale)}><Languages className="size-4" />{languageLabel}</button>
+                        <a href={DOCS_URL} target="_blank" rel="noopener noreferrer" className={menuClass}><BookOpen className="size-4" />{t("topNav.docs")}</a>
+                        <div className="flex items-center gap-3 rounded-md px-3 hover:bg-black/5 dark:hover:bg-white/10"><History className="size-4 shrink-0" /><VersionReleaseModal className="w-full py-2.5 text-left text-sm" triggerLabel={t("version.viewUpdates")} /></div>
+                        <a href="https://github.com/basketikun/infinite-canvas" target="_blank" rel="noopener noreferrer" className={menuClass}><ExternalLink className="size-4" />{t("ux.nav.source")}</a>
+                    </div>
+                }>
+                    <button type="button" className={naturalIconClass} aria-label={t("ux.nav.preferences")} title={t("ux.nav.preferences")}><MoreHorizontal /></button>
+                </Popover>
+            </div>
+        );
+    }
 
     return (
         <div className="inline-flex shrink-0 items-center gap-1">
