@@ -1,0 +1,165 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>无限画布 · 创作者版产品原型</title>
+  <style>
+    :root{--canvas:#f4f2ed;--panel:#fbfaf7;--ink:#292524;--muted:#78716c;--line:#d6d3ca;--green:#386551;--soft:#e7eee8;--warn:#925420;--red:#a43d36}
+    *{box-sizing:border-box}body{margin:0;color:var(--ink);background:var(--panel);font:14px/1.6 "Microsoft YaHei","PingFang SC","Segoe UI",sans-serif}button,input,select,textarea{font:inherit}button{cursor:pointer;color:inherit}button:disabled{cursor:not-allowed;opacity:.48}button,a,input,textarea,select{outline-offset:4px}button:focus-visible,a:focus-visible,input:focus-visible,textarea:focus-visible,select:focus-visible{outline:2px solid var(--green)}button{border:0;background:transparent;border-radius:6px;padding:9px 12px}button:hover:not(:disabled){background:#29252409}a{color:inherit;text-underline-offset:3px}h1,h2,h3,p{margin:0}h1{font-size:23px;font-weight:600}h2{font-size:20px;font-weight:600}h3{font-size:15px;font-weight:600}small,.muted{color:var(--muted)}.primary{background:var(--ink);color:#fff}.primary:hover:not(:disabled){background:#46403b}.outline{border:1px solid var(--line)}.wide{width:100%}.hidden,[hidden]{display:none!important}.row{display:flex;align-items:center;gap:12px}.between{justify-content:space-between}.stack{display:grid;gap:16px}.green{color:var(--green)}.danger{color:var(--red)}
+    .shell{display:grid;grid-template-columns:192px minmax(0,1fr);min-height:100vh}.sidebar{padding:25px 18px;display:flex;flex-direction:column;border-right:1px solid var(--line);background:var(--panel)}.brand{display:flex;align-items:center;gap:10px;margin-bottom:42px}.brand-symbol{font-size:35px;line-height:1;font-weight:600}.brand strong{font-size:17px;letter-spacing:.04em}.brand small{display:block;font-size:11px}.navigation{display:grid;gap:6px}.nav-item{display:flex;align-items:center;gap:12px;width:100%;text-align:left;padding:11px 13px;color:var(--muted)}.nav-item[aria-current=page]{color:var(--ink);background:#e7e5df}.nav-icon{width:20px;text-align:center;font-size:19px}.sidebar-note{margin-top:36px;padding:15px 10px;border-top:1px solid var(--line);font-size:12px;color:var(--muted)}.attribution{margin-top:auto;padding:40px 8px 0;font-size:11px;color:var(--muted)}.main{min-width:0;display:flex;flex-direction:column}.topbar{min-height:78px;display:flex;justify-content:space-between;align-items:center;gap:15px;padding:18px 30px;border-bottom:1px solid var(--line)}.breadcrumb{font-size:12px;color:var(--muted)}.breadcrumb b{font-weight:500;color:var(--ink)}.account{gap:17px}.credit-button{font-variant-numeric:tabular-nums;padding:7px 0}.credit-button strong{font-size:18px;margin:0 5px}.avatar{width:32px;height:32px;display:grid;place-items:center;background:#e7e5df;border-radius:50%;font-size:12px}.demo-banner{background:#eeede6;padding:8px 30px;color:#686056;font-size:12px;display:flex;justify-content:space-between;gap:15px}.page{flex:1;min-width:0}.workspace-heading{padding:25px 30px 22px;display:flex;align-items:center;justify-content:space-between;gap:12px}.workspace-heading p{margin-top:6px;color:var(--muted);font-size:12px}.workspace-layout{display:grid;grid-template-columns:minmax(0,1fr) 290px;min-height:680px;border-top:1px solid var(--line)}.board-viewport{background:var(--canvas);overflow:auto;position:relative}.board{min-width:740px;min-height:650px;position:relative;background-image:radial-gradient(#b5b0a2 0.7px,transparent .7px);background-size:22px 22px}.board-label{position:absolute;left:28px;top:20px;color:var(--muted);font-size:11px}.board svg.connections{position:absolute;top:0;left:0;width:740px;height:630px;pointer-events:none}.canvas-node{position:absolute;width:236px;background:var(--panel);border:1px solid var(--line);border-radius:9px;overflow:hidden}.node-title{padding:10px 13px;font-size:11px;color:var(--muted);display:flex;justify-content:space-between;border-bottom:1px solid var(--line)}.brief{left:32px;top:105px}.brief-content{padding:18px}.brief h3{font-size:18px;margin:6px 0 12px}.brief p{font-size:12px;line-height:1.95;color:#635d55}.brief .tag{display:inline-block;padding:1px 6px;border:1px solid var(--line);font-size:10px;margin-top:15px}.composition{left:314px;top:70px;width:270px}.art{height:268px;background:#b0bcb0;position:relative;overflow:hidden;padding:20px;color:#273e32}.art small{color:inherit;font-size:10px}.art .art-title{font-size:32px;line-height:1.2;margin-top:14px;font-weight:600}.art .coffee-bag{position:absolute;width:105px;height:146px;background:#e5d7b9;right:28px;bottom:23px;transform:rotate(8deg);border:1px solid #ad9f82;box-shadow:8px 12px 0 #273e3222;padding:27px 10px 10px;text-align:center;color:#354d3e;font-size:10px}.coffee-bag:before{content:"";position:absolute;left:0;right:0;top:10px;border-top:2px solid #b9aa8a}.coffee-bag strong{font-size:19px;display:block;letter-spacing:.06em}.art .circle{position:absolute;bottom:-46px;left:-36px;width:200px;height:200px;border:1px solid #546b5677;border-radius:50%}.node-footer{padding:11px 14px;font-size:11px;color:var(--muted)}.result-node{left:330px;top:466px;width:290px}.result-body{padding:18px;display:flex;gap:13px;align-items:center}.result-mark{height:42px;width:42px;background:var(--soft);color:var(--green);display:grid;place-items:center;font-size:21px;border-radius:50%}.result-body p{font-size:11px;color:var(--muted);margin-top:4px}.board-hint{position:absolute;left:28px;bottom:22px;font-size:11px;color:var(--muted)}.composer{border-left:1px solid var(--line);padding:23px 21px;display:flex;flex-direction:column;gap:19px}.composer>header{padding-bottom:15px;border-bottom:1px solid var(--line)}.composer header p{font-size:12px;color:var(--muted);margin-top:4px}.field{display:grid;gap:7px}.field>span,.field>label{font-size:12px;color:#5a544d}.field input,.field select,.field textarea{border:1px solid var(--line);background:transparent;border-radius:5px;padding:10px;width:100%;color:var(--ink)}textarea{resize:vertical;min-height:118px;font-size:12px!important;line-height:1.8}.field select{font-size:12px}.quote{padding:16px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.quote strong{font-size:25px;font-weight:500;font-variant-numeric:tabular-nums}.quote p{font-size:11px;color:var(--muted);margin-top:5px}.status-box{padding:12px;background:var(--soft);font-size:12px;border-radius:5px}.status-box p{margin:5px 0 12px}.status-box .row{gap:5px}.status-box button{padding:7px;font-size:11px;background:var(--panel)}.composer-note{font-size:11px;color:var(--muted);margin-top:auto;padding-top:10px}.notice{font-size:12px;min-height:20px;color:var(--green)}
+    .content-page{padding:36px 40px;max-width:1180px}.lead{margin-top:8px;color:var(--muted);font-size:13px}.balance-strip{display:grid;grid-template-columns:repeat(3,1fr);margin:30px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line)}.balance-item{padding:24px 24px 24px 0}.balance-item strong{display:block;font-size:36px;font-weight:500;line-height:1.5;font-variant-numeric:tabular-nums}.balance-item small{font-size:12px}.section-head{margin:26px 0 14px;display:flex;justify-content:space-between;align-items:center}.section-head p{font-size:12px;color:var(--muted)}.packages{display:grid;grid-template-columns:repeat(3,1fr);gap:15px}.package{border:1px solid var(--line);border-radius:7px;padding:19px}.package strong{display:block;font-size:21px;margin:9px 0}.package p{font-size:12px;color:var(--muted);min-height:40px}.package button{margin-top:16px;width:100%;border:1px solid var(--line);font-size:12px}.table-wrap{overflow:auto}table{width:100%;border-collapse:collapse;font-size:12px;text-align:left}th{font-weight:400;color:var(--muted);padding:11px 12px;border-bottom:1px solid var(--line)}td{padding:15px 12px;border-bottom:1px solid #e8e4db}td:last-child,th:last-child{text-align:right;white-space:nowrap}.billing-note{padding-top:16px;color:var(--muted);font-size:12px}.roadmap{margin-top:28px;display:grid;gap:0}.roadmap article{display:grid;grid-template-columns:140px 1fr;gap:24px;padding:26px 0;border-top:1px solid var(--line)}.roadmap article p{color:#635d55;line-height:1.95;max-width:720px}.phase{font-size:12px;color:var(--green);margin-top:5px}.roadmap h3{margin-bottom:9px}.boundary{padding:18px 20px;background:#eeede6;font-size:12px;margin-top:24px;line-height:1.9}
+    dialog{border:1px solid var(--line);border-radius:12px;padding:30px;width:430px;max-width:calc(100% - 32px);background:var(--panel);color:var(--ink);box-shadow:0 18px 90px #29252422}dialog::backdrop{background:#29252455}dialog h2{margin-bottom:6px}dialog .dialog-lead{font-size:12px;color:var(--muted);margin-bottom:24px}dialog .close{position:absolute;right:14px;top:12px;font-size:20px}dialog .field{margin-bottom:16px}.check{display:flex;align-items:flex-start;gap:8px;font-size:11px;color:var(--muted);margin-bottom:20px}.check input{margin-top:4px}.dialog-footer{font-size:11px;color:var(--muted);text-align:center;margin-top:20px}.success-icon{font-size:30px;color:var(--green);padding:10px 0}.register-error{color:var(--red);font-size:12px;min-height:20px;margin-bottom:8px}.register-preview{margin-bottom:16px;padding:10px;background:var(--soft);font-size:12px}.small-links{font-size:11px;color:var(--muted);line-height:1.8}.toast{position:fixed;bottom:24px;left:50%;transform:translateX(-50%);max-width:calc(100% - 32px);background:var(--ink);color:white;padding:12px 20px;border-radius:6px;z-index:10;font-size:12px}
+    @media(min-width:1550px){.board{min-height:720px}.brief{left:8%;top:140px}.composition{left:48%;top:100px}.result-node{left:48%;top:500px}.connections{display:none}}
+    @media(max-width:1100px){.shell{grid-template-columns:160px minmax(0,1fr)}.sidebar{padding:22px 10px}.workspace-layout{grid-template-columns:minmax(0,1fr) 260px}.topbar,.demo-banner{padding-left:22px;padding-right:22px}.content-page{padding:28px}.workspace-heading{padding:22px}.composer{padding:20px 16px}.brand strong{font-size:15px}.account{gap:10px}}
+    @media(max-width:760px){.shell{display:block}.sidebar{display:block;padding:14px 16px 0;border-right:0;border-bottom:1px solid var(--line)}.brand{margin-bottom:14px}.brand small{display:none}.brand-symbol{font-size:28px}.navigation{display:flex;gap:5px}.nav-item{padding:10px 12px;font-size:12px;white-space:nowrap}.nav-icon{display:none}.sidebar-note,.attribution{display:none}.topbar{min-height:64px;padding:12px 16px}.breadcrumb{font-size:11px}.account{gap:9px}.account .avatar{display:none}.account .outline{font-size:11px;padding:6px 8px}.credit-button{font-size:11px}.credit-button strong{font-size:16px}.demo-banner{padding:9px 16px;font-size:10px}.demo-banner span:last-child{display:none}.workspace-heading{padding:20px 16px;align-items:flex-start}.workspace-heading h1{font-size:19px}.workspace-heading>button{font-size:11px;padding:5px;white-space:nowrap}.workspace-layout{display:flex;flex-direction:column;min-height:0}.board-viewport{height:525px}.board{min-height:525px;transform-origin:top left}.brief{top:90px}.composition{top:50px}.result-node{top:410px}.board-hint{display:none}.composer{border-left:0;border-top:1px solid var(--line);padding:22px 20px}.content-page{padding:26px 18px}.content-page h1{font-size:23px}.balance-item{padding:20px 5px 20px 0}.balance-item strong{font-size:30px}.balance-item small{font-size:10px}.packages{grid-template-columns:1fr}.package p{min-height:0}.section-head{align-items:flex-start;gap:12px}.section-head p{font-size:10px}.roadmap article{grid-template-columns:1fr;gap:10px}.roadmap article p{font-size:13px}dialog{padding:28px 22px}th,td{padding-left:8px;padding-right:8px}}
+    @media(prefers-reduced-motion:reduce){*{scroll-behavior:auto!important}}
+  </style>
+</head>
+<body>
+  <div class="shell">
+    <aside class="sidebar">
+      <div class="brand"><span class="brand-symbol" aria-hidden="true">∞</span><div><strong>无限画布</strong><small>创作者版 · 产品原型</small></div></div>
+      <nav class="navigation" aria-label="主导航">
+        <button class="nav-item" data-page="workspace" aria-current="page"><span class="nav-icon" aria-hidden="true">▦</span>创作空间</button>
+        <button class="nav-item" data-page="wallet"><span class="nav-icon" aria-hidden="true">◉</span>积分账户</button>
+        <button class="nav-item" data-page="roadmap"><span class="nav-icon" aria-hidden="true">☷</span>首版范围</button>
+      </nav>
+      <div class="sidebar-note">从一个想法开始，<br>把每次迭代留在画布上。<br><br>当前示例<br><strong>青野咖啡 · 上新视觉</strong></div>
+      <div class="attribution">基于 <a href="https://github.com/basketikun/infinite-canvas" target="_blank" rel="noopener noreferrer">infinite-canvas</a><br>原作者 basketikun · MIT<br>保留原作者信息与开源许可</div>
+    </aside>
+    <main class="main">
+      <header class="topbar"><div class="breadcrumb">个人工作空间 &nbsp; / &nbsp; <b id="breadcrumb">创作空间</b></div><div class="row account"><button class="credit-button" data-page="wallet" aria-label="查看积分账户">可用 <strong data-balance>120</strong> 积分</button><button class="outline" id="open-register">体验注册流程</button><span class="avatar" aria-label="示例访客">访</span></div></header>
+      <div class="demo-banner"><span>交互原型：所有积分、作品和任务均为演示数据，未连接真实服务。</span><span>邮箱注册 / 费用透明 / 失败退回</span></div>
+      <section id="workspace" class="page" aria-label="创作空间">
+        <div class="workspace-heading"><div><h1>青野咖啡 · 上新视觉</h1><p>商品主图 / 自然质感 / 第一轮创作</p></div><button class="outline" id="export-demo">导出演示方案</button></div>
+        <div class="workspace-layout">
+          <div class="board-viewport" role="region" aria-label="示例画布，小屏可横向滚动" tabindex="0"><div class="board">
+            <div class="board-label">创作画布 &nbsp; / &nbsp; 构图与流程示意</div>
+            <svg class="connections" viewBox="0 0 740 630" aria-hidden="true"><path d="M268 230 C290 230 290 218 314 218" fill="none" stroke="#a9aa9b" stroke-width="1.5"/><circle cx="268" cy="230" r="3" fill="#78716c"/><path d="M449 404 C449 430 475 438 475 466" fill="none" stroke="#a9aa9b" stroke-width="1.5" stroke-dasharray="5 5"/></svg>
+            <article class="canvas-node brief"><div class="node-title"><span>产品说明</span><span>文本</span></div><div class="brief-content"><small>本周上新</small><h3>让早晨慢一点。</h3><p>为青野咖啡制作一组上新视觉。保留包装的纸张质感，以鼠尾草绿作为背景，让产品成为画面的中心。</p><span class="tag">电商商品图</span> <span class="tag">自然光</span></div></article>
+            <article class="canvas-node composition"><div class="node-title"><span>视觉构图</span><span>示意作品</span></div><div class="art" aria-label="青野咖啡绿色商品海报构图示意"><small>青野 · 日常咖啡</small><div class="art-title">留一点时间<br>给早晨。</div><div class="circle"></div><div class="coffee-bag">每日一杯<strong>青野</strong>山野拼配<br>250g / COFFEE</div></div><div class="node-footer">排版占位作品 · 非 AI 生成结果</div></article>
+            <article class="canvas-node result-node"><div class="result-body"><div class="result-mark" id="result-mark">＋</div><div><h3 id="result-title">下一步，生成你的版本</h3><p id="result-description">调整右侧提示词，查看费用后开始。</p></div></div></article>
+            <div class="board-hint">此画布用于流程评审；完整拖拽、编辑与导出能力沿用原项目。</div>
+          </div></div>
+          <aside class="composer" aria-label="生成设置">
+            <header><h3>生成新版本</h3><p>一份说明，延展更多视觉方向。</p></header>
+            <label class="field"><span>创作模式</span><select id="quality"><option value="12">标准画质 · 12 积分 / 张</option><option value="24">精细画质 · 24 积分 / 张</option></select></label>
+            <label class="field"><span>提示词</span><textarea id="prompt">咖啡新品主图，鼠尾草绿背景，自然侧光，牛皮纸包装，留出上方标题区域，简洁清爽。</textarea></label>
+            <div class="row"><label class="field" style="flex:1"><span>生成张数</span><select id="quantity"><option value="1">1 张</option><option value="2">2 张</option><option value="4">4 张</option></select></label><div class="field" style="flex:1"><span>画面比例</span><div style="padding:10px 0;font-size:12px">1:1 · 本例固定</div></div></div>
+            <div class="quote"><div class="row between"><span>本次预计</span><span><strong id="quote">12</strong> 积分</span></div><p>提交时冻结，成功后扣除，失败退回。<br>示例费率，正式报价由服务端计算。</p></div>
+            <button class="primary wide" id="generate">生成演示任务</button>
+            <div class="status-box" id="task-status" hidden role="status"><strong>演示任务处理中</strong><p>已冻结 <span id="held-cost">12</span> 积分。选择一种结果，查看积分变化。</p><div class="row"><button id="complete-task">模拟生成成功</button><button id="fail-task">模拟生成失败</button></div></div>
+            <p class="notice" id="generation-notice" role="status" aria-live="polite"></p>
+            <p class="composer-note">真实产品将在登录后提供私有项目与任务恢复。当前原型刷新后会重置。</p>
+          </aside>
+        </div>
+      </section>
+      <section id="wallet" class="page content-page" hidden aria-label="积分账户">
+        <h1>每一笔积分，都有去处。</h1><p class="lead">查看可用额度、任务冻结与消费记录。以下全部为交互演示。</p>
+        <div class="balance-strip"><div class="balance-item"><small>可用积分</small><strong data-balance>120</strong><small>可用于新的生成任务</small></div><div class="balance-item"><small>任务冻结</small><strong id="frozen-balance">0</strong><small>处理完成后结算或退回</small></div><div class="balance-item"><small>累计消耗</small><strong id="spent-balance">0</strong><small>仅包含已成功交付的结果</small></div></div>
+        <div class="section-head"><h2>补充创作额度</h2><p>套餐示意，价格需经成本测算后确定</p></div>
+        <div class="packages"><article class="package"><small>偶尔创作</small><strong>100 积分</strong><p>用于轻量尝试和少量视觉迭代。</p><button class="recharge">充值尚未接入</button></article><article class="package"><small>持续创作</small><strong>500 积分</strong><p>用于每周内容、商品上新与系列创作。</p><button class="recharge">充值尚未接入</button></article><article class="package"><small>集中创作</small><strong>2,000 积分</strong><p>用于多个项目与集中产出。</p><button class="recharge">充值尚未接入</button></article></div>
+        <div class="section-head"><h2>积分明细</h2><p>生成报价、冻结和最终结算分别可查</p></div>
+        <div class="table-wrap"><table><thead><tr><th>事项</th><th>状态</th><th>关联任务</th><th>可用额度变化</th></tr></thead><tbody id="ledger"></tbody></table></div>
+        <p class="billing-note">注册赠送仅是演示数据。正式赠送额度、适用模型、有效期和充值规则需要在上线前公示。</p>
+      </section>
+      <section id="roadmap" class="page content-page" hidden aria-label="首版范围">
+        <h1>先把一次创作，完整交付。</h1><p class="lead">保留上游画布能力，优先补齐账户、可靠任务、私有资产与积分闭环。</p>
+        <div class="roadmap">
+          <article><div><h3>注册与身份</h3><div class="phase">首版必需</div></div><div><h3>邮箱验证后开始创作</h3><p>邮箱验证码注册与登录、退出登录、会话管理、注销入口。预留手机号和微信身份绑定；默认个人空间，避免提前引入复杂的团队权限。</p></div></article>
+          <article><div><h3>创作与资产</h3><div class="phase">首版必需</div></div><div><h3>图片生成与编辑，结果回到项目</h3><p>精选少量稳定模型，统一服务端调用。项目自动保存、任务刷新可恢复、素材私有存储。清楚显示保存状态、排队、处理中、成功和失败。</p></div></article>
+          <article><div><h3>积分与运营</h3><div class="phase">首版必需</div></div><div><h3>先报价，再冻结，交付后结算</h3><p>积分账本、失败退回、并发控制、领取防刷、人工补偿与审计记录。支付验签和对账完成后开放充值；内测可先使用受审计的运营发放。</p></div></article>
+          <article><div><h3>扩展能力</h3><div class="phase">验证需求后增加</div></div><div><h3>视频、团队与更多登录方式</h3><p>视频有更长任务周期与更高成本，需单独计费策略。小团队先共享导出结果，之后增加项目共享、成员权限和团队钱包。</p></div></article>
+        </div>
+        <div class="boundary">交付边界：本次原型仅验证界面与流程，以上服务端能力均为待开发。现有上游依赖浏览器本地存储和用户自配 API；正式收费产品必须新增受信后端，不能把原型中的余额逻辑用于生产。</div>
+      </section>
+    </main>
+  </div>
+  <dialog id="register-dialog" aria-labelledby="register-title">
+    <button class="close" id="close-register" aria-label="关闭注册演示">×</button>
+    <div id="register-form-view"><h2 id="register-title">开始你的第一张画布</h2><p class="dialog-lead">邮箱注册演示，不发送真实邮件，也不创建账户。</p>
+      <form id="register-form">
+        <label class="field"><span>邮箱地址</span><input id="email" type="email" autocomplete="off" placeholder="creator@example.com" required></label>
+        <div id="verification-fields" hidden><div class="register-preview">演示邮件已准备好。此原型固定验证码：246810。<br>真实产品必须在服务端生成并验证一次性验证码。</div><label class="field"><span>演示验证码</span><input id="verification-code" inputmode="numeric" pattern="[0-9]{6}" maxlength="6" autocomplete="off" placeholder="输入 6 位演示验证码"></label></div>
+        <label class="check"><input type="checkbox" id="consent" required><span>我了解这是演示流程，不会创建真实账户。正式注册时需单独提供服务协议和隐私政策。</span></label>
+        <p id="register-error" class="register-error" role="alert"></p><button type="submit" class="primary wide" id="register-submit">模拟发送验证码</button>
+      </form><p class="dialog-footer">首版使用邮箱；手机号与微信登录在后续接入。</p>
+    </div>
+    <div id="register-success" hidden><div class="success-icon">✓</div><h2>注册流程演示完成</h2><p class="dialog-lead">已体验邮箱验证流程。未创建真实账号，未额外发放积分。</p><button class="primary wide" id="enter-workspace">进入演示画布</button></div>
+  </dialog>
+  <div class="toast" id="toast" role="status" hidden></div>
+  <script>
+    const $ = (selector) => document.querySelector(selector);
+    const state = { available:120, frozen:0, spent:0, pending:null, sequence:0, rows:[{label:'示例体验积分',status:'演示发放',task:'—',change:'+120'}] };
+    let registerStep = 'email';
+    let toastTimer;
+    const pageNames = { workspace:'创作空间', wallet:'积分账户', roadmap:'首版范围' };
+    function navigate(name) {
+      document.querySelectorAll('.page').forEach(page => page.hidden = page.id !== name);
+      document.querySelectorAll('.nav-item').forEach(button => button.dataset.page === name ? button.setAttribute('aria-current','page') : button.removeAttribute('aria-current'));
+      $('#breadcrumb').textContent = pageNames[name];
+    }
+    function toast(message) { $('#toast').textContent=message; $('#toast').hidden=false; clearTimeout(toastTimer); toastTimer=setTimeout(()=>$('#toast').hidden=true,5000); }
+    function price() { return Number($('#quality').value)*Number($('#quantity').value); }
+    function render() {
+      document.querySelectorAll('[data-balance]').forEach(el=>el.textContent=state.available.toLocaleString());
+      $('#frozen-balance').textContent=state.frozen; $('#spent-balance').textContent=state.spent;
+      $('#quote').textContent=price(); $('#task-status').hidden=!state.pending;
+      $('#generate').disabled=Boolean(state.pending); $('#generate').textContent=state.pending?'演示任务处理中':'生成演示任务';
+      ['#quality','#quantity','#prompt'].forEach(id=>$(id).disabled=Boolean(state.pending));
+      $('#ledger').replaceChildren();
+      [...state.rows].reverse().forEach(row=>{
+        const tr=document.createElement('tr');
+        [row.label,row.status,row.task,row.change].forEach((text,index)=>{const td=document.createElement('td');td.textContent=text;if(index===3&&text.startsWith('+'))td.className='green';tr.append(td);});
+        $('#ledger').append(tr);
+      });
+    }
+    document.querySelectorAll('[data-page]').forEach(button=>button.addEventListener('click',()=>navigate(button.dataset.page)));
+    ['#quality','#quantity'].forEach(id=>$(id).addEventListener('change',render));
+    $('#generate').addEventListener('click',()=>{
+      if(state.pending)return;
+      if(!$('#prompt').value.trim()){ $('#generation-notice').textContent='请先填写提示词。';$('#prompt').focus();return; }
+      const cost=price();
+      if(state.available<cost){$('#generation-notice').textContent='可用积分不足，请到积分账户查看额度。';toast('可用积分不足。此原型未接入真实充值。');return;}
+      const id='DEMO-'+String(++state.sequence).padStart(3,'0');
+      state.pending={id,cost,quantity:Number($('#quantity').value)};state.available-=cost;state.frozen+=cost;
+      state.rows.push({label:'生成任务冻结',status:'已冻结',task:id,change:'−'+cost});
+      $('#held-cost').textContent=cost;$('#generation-notice').textContent='';
+      $('#result-mark').textContent='…';$('#result-title').textContent='演示任务处理中';$('#result-description').textContent='积分已冻结，等待模拟结果。';render();
+    });
+    function finish(success){
+      const task=state.pending;if(!task)return;
+      state.frozen-=task.cost;
+      if(success){state.spent+=task.cost;}else{state.available+=task.cost;}
+      state.rows.push({label:success?'生成成功结算':'生成失败退回',status:success?'已扣除 '+task.cost+' 积分':'已退回冻结积分',task:task.id,change:success?'0（从冻结结算）':'+'+task.cost});
+      $('#generation-notice').textContent=success?'已模拟成功，扣除 '+task.cost+' 积分。':'已模拟失败，'+task.cost+' 积分已全部退回。';
+      $('#result-mark').textContent=success?'✓':'↶';$('#result-title').textContent=success?'已完成 '+task.quantity+' 张结果的流程演示':'任务失败，积分已退回';
+      $('#result-description').textContent=success?'结果交付为模拟状态，未调用真实模型。':'调整参数后可重新体验。';state.pending=null;render();
+    }
+    $('#complete-task').addEventListener('click',()=>finish(true));$('#fail-task').addEventListener('click',()=>finish(false));
+    document.querySelectorAll('.recharge').forEach(button=>button.addEventListener('click',()=>toast('充值尚未接入，不会创建订单或收取费用。')));
+    $('#open-register').addEventListener('click',()=>{
+      registerStep='email';$('#register-form').reset();$('#verification-fields').hidden=true;
+      $('#verification-code').required=false;$('#register-error').textContent='';
+      $('#register-submit').textContent='模拟发送验证码';$('#register-form-view').hidden=false;
+      $('#register-success').hidden=true;$('#register-dialog').showModal();
+    });
+    $('#close-register').addEventListener('click',()=>$('#register-dialog').close());
+    $('#email').addEventListener('input',()=>{if(registerStep==='code'){registerStep='email';$('#verification-fields').hidden=true;$('#verification-code').required=false;$('#verification-code').value='';$('#register-submit').textContent='模拟发送验证码';$('#register-error').textContent='邮箱已变更，请重新模拟发送验证码。';}});
+    $('#register-form').addEventListener('submit',event=>{
+      event.preventDefault();$('#register-error').textContent='';
+      if(registerStep==='email'){registerStep='code';$('#verification-fields').hidden=false;$('#verification-code').required=true;$('#register-submit').textContent='验证并完成演示';$('#verification-code').focus();return;}
+      if($('#verification-code').value!=='246810'){$('#register-error').textContent='验证码不正确，请使用本原型展示的 246810。';return;}
+      $('#register-form-view').hidden=true;$('#register-success').hidden=false;
+    });
+    $('#enter-workspace').addEventListener('click',()=>{$('#register-dialog').close();navigate('workspace');});
+    $('#export-demo').addEventListener('click',()=>{
+      const payload={type:'product-prototype-only',project:'青野咖啡 · 上新视觉',prompt:$('#prompt').value,notice:'产品流程演示，非真实生成结果或正式画布文件'};
+      const url=URL.createObjectURL(new Blob([JSON.stringify(payload,null,2)],{type:'application/json;charset=utf-8'}));
+      const link=document.createElement('a');link.href=url;link.download='青野咖啡-演示方案.json';link.click();setTimeout(()=>URL.revokeObjectURL(url),1000);toast('已导出演示说明与提示词。');
+    });
+    render();
+  </script>
+</body>
+</html>

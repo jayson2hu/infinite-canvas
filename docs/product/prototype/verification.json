@@ -1,0 +1,14 @@
+{
+  "scope": "Static prototype only; no production service verification",
+  "passed": [
+    "Desktop generation settings appear beside the canvas",
+    "Successful task freezes once and settles without a second deduction",
+    "Failed task restores all frozen points",
+    "Recharge remains explicitly unconnected and does not create credits",
+    "Quantity and quality update the quote; insufficient funds reject the task",
+    "Registration demo rejects wrong codes, resets after email changes, and grants no real account or points",
+    "All three mobile pages avoid page overflow; dialog closes with Escape",
+    "No browser runtime errors during the tested flows"
+  ],
+  "browser_errors": []
+}
