@@ -1,0 +1,40 @@
+{
+  "upstream_commit": "3a6b64b602ad062b29fac66902ed18a7ef5fd9dc",
+  "base_url": "http://127.0.0.1:3036",
+  "browser": "Chrome, isolated context",
+  "checks": [
+    "Application source, assets, plugins, version, and license match upstream.",
+    "Original desktop homepage and navigation render.",
+    "Theme switches and persists across reload.",
+    "Canvas creation, text editing, dragging, undo/redo, zoom, and reload persistence pass.",
+    "Canvas export downloads a valid ZIP containing edited node content.",
+    "Empty prompt disables generation; missing credentials open settings without an AI request.",
+    "Video workbench, assets, and prompt-library routes render.",
+    "Homepage and image workbench render at 390 px without document overflow.",
+    "No uncaught browser runtime errors during these checks."
+  ],
+  "page_errors": [],
+  "ai_requests": [],
+  "limits": [
+    "No paid AI generation or real API credentials used.",
+    "No production deployment, Docker, Agent, WebDAV, or remote plugin execution tested.",
+    "Visual comparison covers the desktop homepage header and hero, not every application state."
+  ],
+  "web_tree": "f29602789f7337da7306c44e449d0bd877c1564c",
+  "homepage_visual_comparison": {
+    "reference_url": "https://canvas.best",
+    "region": {
+      "x": 0,
+      "y": 0,
+      "width": 1440,
+      "height": 825
+    },
+    "local_png_sha256": "96e597c92db2ad83cc2fa64ad6a4fca7e89d4e8e2fa42f7512e10803c168d84b",
+    "reference_png_sha256": "075c7cbc01c994017d3d13b792a8a1dfabaaa0faf0d78df4089a3cae3f287614",
+    "identical": false,
+    "different_pixels": 56,
+    "pixels_with_channel_delta_over_20": 48,
+    "total_pixels": 1188000
+  },
+  "status": "passed"
+}

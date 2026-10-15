@@ -1,3 +1,5 @@
+> 本分支为原版网站复刻，运行方式、源码版本与验收结果见 [复刻交付说明](REPLICA.md)。
+
 <p align="center">
   <img src="web/public/logo.svg" width="96" alt="infinite-canvas logo">
 </p>
